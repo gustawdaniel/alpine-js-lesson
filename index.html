@@ -3,57 +3,57 @@
   xmlns:x-bind="http://www.w3.org/1999/xhtml"
   xmlns:x-on="http://www.w3.org/1999/xhtml"
 >
-<head>
-  <title>Alpine Lesson</title>
-  <script defer src="//unpkg.com/alpinejs"></script>
-  <script src="//cdn.tailwindcss.com"></script>
-  <style>
+  <head>
+    <title>Alpine Lesson</title>
+    <script defer src="//unpkg.com/alpinejs"></script>
+    <script src="//cdn.tailwindcss.com"></script>
+    <style>
       [x-cloak] {
-          display: none;
+        display: none;
       }
-  </style>
-</head>
-<body>
-<!--x-data / @click / x-cloak-->
-<article class="bg-white py-12 sm:py-16">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:mx-0">
-      <h2
-        class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
-      >
-        x-data / @click / x-cloak
-      </h2>
+    </style>
+  </head>
+  <body>
+    <!--x-data / @click / x-cloak-->
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            x-data / @click / x-cloak
+          </h2>
 
-      <p class="mt-6 text-lg leading-8 text-gray-600"></p>
+          <p class="mt-6 text-lg leading-8 text-gray-600"></p>
 
-      <div
-        @keydown.window="if ($event.key === 'Escape') { open = false }"
-        x-data="{ open: false }"
-      >
-        <button @click="open = true">Expand</button>
-        <button x-on:click="open = !open">Toggle</button>
+          <div
+            @keydown.window="if ($event.key === 'Escape') { open = false }"
+            x-data="{ open: false }"
+          >
+            <button @click="open = true">Expand</button>
+            <button x-on:click="open = !open">Toggle</button>
 
-        <span x-cloak x-show="open" x-transition>
+            <span x-cloak x-show="open" x-transition>
               Content... [ Esc to close ]
             </span>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</article>
+    </article>
 
-<article class="bg-white py-12 sm:py-16">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:mx-0">
-      <h2
-        class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
-      >
-        x-init / x-text / x-html / x-bind
-      </h2>
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            x-init / x-text / x-html / x-bind
+          </h2>
 
-      <div class="mt-6 text-lg leading-8 text-gray-600">
-        <div
-          x-data="{ dogFact: '', id: '' }"
-          x-init="fetch('https://dogapi.dog/api/v2/facts')
+          <div class="mt-6 text-lg leading-8 text-gray-600">
+            <div
+              x-data="{ dogFact: '', id: '' }"
+              x-init="fetch('https://dogapi.dog/api/v2/facts')
                 .then(response => response.json())
                 .then(
                     data => {
@@ -61,105 +61,151 @@
                         id = data.data[0].id
                     }
                 )"
-        >
+            >
               <pre x-bind:title="id ? `Fact ID: ${id}` : ''" x-text="dogFact">
 Loading...</pre
               >
-        </div>
+            </div>
 
-        <div x-data>
-          <dl class="flex gap-3">
-            <dt x-text="'&#129303;'">a</dt>
-            <dt x-html="'&#128578;'">b</dt>
-          </dl>
+            <div x-data>
+              <dl class="flex gap-3">
+                <dt x-text="'&#129303;'">a</dt>
+                <dt x-html="'&#128578;'">b</dt>
+              </dl>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</article>
+    </article>
 
-<article class="bg-white py-12 sm:py-16">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:mx-0">
-      <h2
-        class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
-      >
-        x-bind / x-html
-      </h2>
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            x-bind / x-html
+          </h2>
 
-      <div
-        class="mt-6 text-lg leading-8 text-gray-600"
-        x-data="{content: '<p>Loading...</p>'}"
-      >
-        <button
-          x-on:click="content = '<ul><li class=\'text-green-600 underline\'>Loaded content!</li></ul>'"
-        >
-          Load Content
-        </button>
-        <div
-          x-bind:class="content.includes('Loading') ? 'bg-gray-200' : 'invert'"
-          x-html="content"></div>
+          <div
+            class="mt-6 text-lg leading-8 text-gray-600"
+            x-data="{content: '<p>Loading...</p>'}"
+          >
+            <button
+              x-on:click="content = '<ul><li class=\'text-green-600 underline\'>Loaded content!</li></ul>'"
+            >
+              Load Content
+            </button>
+            <div
+              x-bind:class="content.includes('Loading') ? 'bg-gray-200' : 'invert'"
+              x-html="content"
+            ></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</article>
+    </article>
 
-<article class="bg-white py-12 sm:py-16">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:mx-0">
-      <h2
-        class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
-      >
-        x-for / x-effect / $refs / x-ref
-      </h2>
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            x-for / x-effect / $refs / x-ref
+          </h2>
 
-      <div class="mt-6 text-lg leading-8 text-gray-600">
-
-        <div x-data="{clicks: new Map([]), counter: 0}"
-        x-effect="$refs.map_debug.textContent = 'ok'.repeat(counter)"
-        >
-          <template x-for="row in [...new Array(10)].map((_,i)=>i)">
-            <div class="flex cursor-pointer">
-              <template x-for="col in [...new Array(10)].map((_,i)=>i)">
-                <div class="h-8 w-8 text-center select-none	transition-all transform"
-                     x-bind:class="
+          <div class="mt-6 text-lg leading-8 text-gray-600">
+            <div
+              x-data="{clicks: new Map([]), counter: 0}"
+              x-effect="$refs.map_debug.textContent = 'ok'.repeat(counter)"
+            >
+              <template x-for="row in [...new Array(10)].map((_,i)=>i)">
+                <div class="flex cursor-pointer">
+                  <template x-for="col in [...new Array(10)].map((_,i)=>i)">
+                    <div
+                      class="h-8 w-8 text-center select-none transition-all transform"
+                      x-bind:class="
                      (row+col) % 2 ? 'text-white bg-black hover:bg-gray-5R00' : 'hover:bg-gray-200'"
-                     x-bind:style="`transform: rotate(${45 * (clicks.get(`${row}:${col}`) ?? 0)}deg);`"
-                     x-on:click="
+                      x-bind:style="`transform: rotate(${45 * (clicks.get(`${row}:${col}`) ?? 0)}deg);`"
+                      x-on:click="
                       clicks.set(`${row}:${col}`, (clicks.get(`${row}:${col}`) ?? 0) + 1);
                       counter++
                       "
-                     x-text="clicks.get(`${row}:${col}`) ?? ''"
-                ></div>
+                      x-text="clicks.get(`${row}:${col}`) ?? ''"
+                    ></div>
+                  </template>
+                </div>
               </template>
+
+              <pre x-ref="map_debug"></pre>
+              <pre x-text="JSON.stringify([...clicks.entries()])"></pre>
+              <pre x-text="JSON.stringify(counter)"></pre>
             </div>
-          </template>
-
-          <pre x-ref="map_debug"></pre>
-          <pre x-text="JSON.stringify([...clicks.entries()])"></pre>
-          <pre x-text="JSON.stringify(counter)"></pre>
-
+          </div>
         </div>
-
-
       </div>
-    </div>
-  </div>
-</article>
+    </article>
 
+    <!-- Alpine.store -->
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            Alpine.store
+          </h2>
 
-<article class="bg-white py-12 sm:py-16">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:mx-0">
-      <h2
-        class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
-      >
-        start here
-      </h2>
+          <div class="mt-6 text-lg leading-8 text-gray-600">
+            <script defer>
+              document.addEventListener('alpine:init', () => {
+                Alpine.store('notifications', {
+                  items: [],
 
-      <div class="mt-6 text-lg leading-8 text-gray-600">content here</div>
-    </div>
-  </div>
-</article>
-</body>
+                  notify(message) {
+                    console.log('m', message)
+                    this.items.push(message)
+                    if (this.items.length > 5) {
+                      this.items.shift()
+                    }
+                  },
+                })
+              })
+            </script>
+
+            <div x-data>
+              <button
+                x-on:click="$store.notifications.notify(`Message: ${Math.random().toFixed(17)}`)"
+              >
+                Notify
+              </button>
+            </div>
+
+            <ul x-init="setTimeout(() => {  } ,100)">
+              <template x-for="message in $store.notifications.items">
+                <ol
+                  class="font-mono"
+                  x-html="`<div class='flex gap-2'><span>${message}</span><div class='bg-black' style='width: ${7*('0.'+message.split('0.').at(-1))+'em'}'></div></div>`"
+                ></ol>
+              </template>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            start here
+          </h2>
+
+          <div class="mt-6 text-lg leading-8 text-gray-600">content here</div>
+        </div>
+      </div>
+    </article>
+  </body>
 </html>
