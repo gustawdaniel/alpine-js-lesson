@@ -103,6 +103,25 @@ If you are using x-show it is recommended to add x-transition to make it smooth.
 
 There as `x-text` and `x-html` that pasting content to elements.
 
+
+## Alpine reactivity on map
+
+If you use `JSON.stringify(m)` where `m = new Map()` it will
+not react on map changes. Instead you should destructure it like this
+
+```html
+<!-- declare map -->
+<div x-data="{clicks: new Map([])}">
+
+  <!--  activate change in map-->
+  <button @click="clicks.set(`key`, 1)">Set</button>
+  
+  <!-- actually reactive output -->
+  <pre x-text="JSON.stringify([...clicks.entries()])"></pre>
+
+</div>
+```
+
 15 Attributes:
 x-data
 x-bind
