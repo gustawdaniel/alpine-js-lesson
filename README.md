@@ -49,3 +49,13 @@ Docs: https://alpinejs.dev/
 ### x-cloak
 
 > Hide a block of HTML until after Alpine is finished initializing its contents
+
+## x-on:click === @click
+
+There is `@` that is shortcut form `x-on:`.
+
+You can add also modifiers to listeners like this
+
+```javascript
+@keydown.window="if ($event.key === 'Escape') { open = false }"
+```

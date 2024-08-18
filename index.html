@@ -10,13 +10,29 @@
     </style>
 </head>
 <body>
-    <div x-data="{ open: false }">
-        <button @click="open = true">Expand</button>
 
-        <span x-show="open" x-cloak>
-            Content...
-        </span>
+<article class="bg-white py-24 sm:py-32">
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+            <h2 class="text-4xl font-bold tracking-tight
+                text-gray-900 sm:text-6xl">x-data / @click / x-cloak</h2>
+
+            <p class="mt-6 text-lg leading-8 text-gray-600">
+
+            <div x-data="{ open: false }" @keydown.window="if ($event.key === 'Escape') { open = false }">
+                <button @click="open = true">Expand</button>
+                <button x-on:click="open = !open">Toggle</button>
+
+                <span x-show="open" x-cloak>
+                    Content... [ Esc to close ]
+                </span>
+            </div>
+
+        </div>
     </div>
+
+</article>
 </body>
 </html>
 
