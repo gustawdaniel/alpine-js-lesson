@@ -1,9 +1,22 @@
-<script src="//unpkg.com/alpinejs" defer></script>
+<html lang="en">
+<head>
+    <title>Alpine Lesson</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="//cdn.tailwindcss.com"></script>
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div x-data="{ open: false }">
+        <button @click="open = true">Expand</button>
 
-<div x-data="{ open: false }">
-    <button @click="open = true">Expand</button>
+        <span x-show="open" x-cloak>
+            Content...
+        </span>
+    </div>
+</body>
+</html>
 
-    <span x-show="open" style="display: none">
-        Content...
-    </span>
-</div>
