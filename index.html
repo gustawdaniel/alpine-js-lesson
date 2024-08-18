@@ -1,38 +1,95 @@
-<html lang="en">
-<head>
+<html
+  lang="en"
+  xmlns:x-bind="http://www.w3.org/1999/xhtml"
+  xmlns:x-on="http://www.w3.org/1999/xhtml"
+>
+  <head>
     <title>Alpine Lesson</title>
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script defer src="//unpkg.com/alpinejs"></script>
     <script src="//cdn.tailwindcss.com"></script>
     <style>
-        [x-cloak] {
-            display: none;
-        }
+      [x-cloak] {
+        display: none;
+      }
     </style>
-</head>
-<body>
-
-<article class="bg-white py-24 sm:py-32">
-
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+  </head>
+  <body>
+    <!--x-data / @click / x-cloak-->
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:mx-0">
-            <h2 class="text-4xl font-bold tracking-tight
-                text-gray-900 sm:text-6xl">x-data / @click / x-cloak</h2>
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            x-data / @click / x-cloak
+          </h2>
 
-            <p class="mt-6 text-lg leading-8 text-gray-600">
+          <p class="mt-6 text-lg leading-8 text-gray-600"></p>
 
-            <div x-data="{ open: false }" @keydown.window="if ($event.key === 'Escape') { open = false }">
-                <button @click="open = true">Expand</button>
-                <button x-on:click="open = !open">Toggle</button>
+          <div
+            @keydown.window="if ($event.key === 'Escape') { open = false }"
+            x-data="{ open: false }"
+          >
+            <button @click="open = true">Expand</button>
+            <button x-on:click="open = !open">Toggle</button>
 
-                <span x-show="open" x-cloak>
-                    Content... [ Esc to close ]
-                </span>
+            <span x-cloak x-show="open" x-transition>
+              Content... [ Esc to close ]
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            x-init / x-text / x-html / x-bind
+          </h2>
+
+          <div class="mt-6 text-lg leading-8 text-gray-600">
+            <div
+              x-data="{ dogFact: '', id: '' }"
+              x-init="fetch('https://dogapi.dog/api/v2/facts')
+                .then(response => response.json())
+                .then(
+                    data => {
+                        dogFact = data.data[0].attributes.body
+                        id = data.data[0].id
+                    }
+                )"
+            >
+              <pre x-bind:title="id ? `Fact ID: ${id}` : ''" x-text="dogFact">
+Loading...</pre
+              >
             </div>
 
+            <div x-data>
+              <dl class="flex gap-3">
+                <dt x-text="'&#129303;'">a</dt>
+                <dt x-html="'&#128578;'">b</dt>
+              </dl>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </article>
 
-</article>
-</body>
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            start here
+          </h2>
+
+          <div class="mt-6 text-lg leading-8 text-gray-600">content here</div>
+        </div>
+      </div>
+    </article>
+  </body>
 </html>
-
