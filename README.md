@@ -173,7 +173,7 @@ document.addEventListener('alpine:init', () => {
 
 There are aliases making alpine similar to vue. Alpine was initially tight
 connected to vue, because of it was using vue reactivity engine, but they stopped
-with release v3 to be better adjusted to hist use case: static html with small js 
+with release v3 to be better adjusted to hist use case: static html with small js
 enchantment.
 
 ## Both x-if and x-for need template
@@ -181,13 +181,13 @@ enchantment.
 If you will write
 
 ```html
-<div x-if="condition">
+<div x-if="condition"></div>
 ```
 
 it will not work, because you have to use template with this directive:
-  
+
 ```html
-<template x-if="condition">
+<template x-if="condition"></template>
 ```
 
 ## Don't use many elements in single template. Template should have single root
@@ -195,23 +195,34 @@ it will not work, because you have to use template with this directive:
 This is bad: will not work, only first line will be displayed
 
 ```html
-  <template x-if="$store.secret && $store.secret.includes('*')">
-      <p>Shanon entropy in bits: <span x-text="$store.entropy.bits($store.secret)"></span></p>
-      <p>It means that pass: <span x-text="$store.entropy.passwordGrade($store.secret).title"></span></p>
-  </template>
+<template x-if="$store.secret && $store.secret.includes('*')">
+  <p>
+    Shanon entropy in bits:
+    <span x-text="$store.entropy.bits($store.secret)"></span>
+  </p>
+  <p>
+    It means that pass:
+    <span x-text="$store.entropy.passwordGrade($store.secret).title"></span>
+  </p>
+</template>
 ```
 
 This works: you will see both lines reactive
 
 ```html
-  <template x-if="$store.secret && $store.secret.includes('*')">
-    <div>
-      <p>Shanon entropy in bits: <span x-text="$store.entropy.bits($store.secret)"></span></p>
-      <p>It means that pass: <span x-text="$store.entropy.passwordGrade($store.secret).title"></span></p>
-    </div>
-  </template>
+<template x-if="$store.secret && $store.secret.includes('*')">
+  <div>
+    <p>
+      Shanon entropy in bits:
+      <span x-text="$store.entropy.bits($store.secret)"></span>
+    </p>
+    <p>
+      It means that pass:
+      <span x-text="$store.entropy.passwordGrade($store.secret).title"></span>
+    </p>
+  </div>
+</template>
 ```
-
 
 15 Attributes:
 x-data
@@ -219,23 +230,23 @@ x-bind
 x-on
 x-text
 x-html
-x-model             
+x-model  
 x-show
 x-transition
 x-for
-x-if               
+x-if  
 x-init
 x-effect
 x-ref
 x-cloak
-x-ignore            [-]
+x-ignore [-]
 6 Properties:
 $store
-$el                 [-]
+$el [-]
 $dispatch           [-]
-$watch              [-]
+$watch [-]
 $refs
-$nextTick           [-]
+$nextTick [-]
 2 Methods:
-Alpine.data         [-]
+Alpine.data [-]
 Alpine.store
