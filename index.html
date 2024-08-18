@@ -194,6 +194,89 @@ Loading...</pre
       </div>
     </article>
 
+
+<!--    x-model -->
+    <article class="bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            x-model
+          </h2>
+
+          <div class="mt-6 text-lg leading-8 text-gray-600">
+
+            <script>
+              document.addEventListener('alpine:init', () => {
+                // Shanon entropy
+                Alpine.store('entropy', {
+                  // Measure the entropy of a string in total bits.
+                  bits(s) {
+                    // Create a dictionary of character frequencies and iterate over it.
+                    const process = (s, evaluator) => {
+                      var h = Object.create(null), k;
+                      s.split('').forEach(function(c) {
+                        h[c] && h[c]++ || (h[c] = 1);
+                      });
+                      if (evaluator) for (k in h) evaluator(k, h[k]);
+                      return h;
+                    }
+
+                    // Measure the entropy of a string in bits per symbol.
+                    const entropy = function(s) {
+                      var sum = 0, len = s.length;
+                      process(s, function(k, f) {
+                        var p = f / len;
+                        sum -= p * Math.log(p) / Math.log(2);
+                      });
+                      return sum;
+                    };
+
+                    return entropy(s) * s.length;
+                  },
+
+                  passwordGrade(s) {
+                    console.log('s', s)
+                    const bits = this.bits(s);
+                    if(bits < 10) return {title: 'it suck', color: 'bg-red-500'};
+                    if(bits < 40) return {title:'weak', color: 'bg-orange-500'};
+                    if(bits < 80) return {title:'decent', color: 'bg-yellow-500'};
+                    if(bits < 120) return {title:'strong', color: 'bg-green-500'};
+                    return {title:'hax0r lvl', color: 'bg-black'};
+                  }
+                })
+              });
+            </script>
+
+            <div x-data>
+              <p class="text-slate-600">Add * to text to make it password</p>
+            <input
+              class="px-2 border"
+              x-bind:type="$store.secret && $store.secret.includes('*') ? 'password' : 'text'"
+              x-model="$store.secret"
+            >
+              <template x-if="$store.secret && !$store.secret.includes('*')">
+                <p class="text-gray-500">Its even not password: use "*", there is not "*" in <span class="text-red-400" x-text="$store.secret"></span></p>
+              </template>
+              <template x-if="$store.secret && $store.secret.includes('*')">
+                <div>
+                  <p>Shanon entropy in bits: <span x-text="$store.entropy.bits($store.secret)"></span></p>
+                  <p>It means that pass: <span x-text="$store.entropy.passwordGrade($store.secret).title"></span></p>
+                  <div class="w-full h-10" x-bind:class="$store.entropy.passwordGrade($store.secret).color"></div>
+                </div>
+              </template>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </article>
+
+
+
     <article class="bg-white py-12 sm:py-16">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:mx-0">
